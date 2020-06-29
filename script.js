@@ -1,22 +1,9 @@
-let current = new Date();
-let monthNumber = (current.getMonth()+1);
+
 let monthName;
-let pastNoon;
-let dayOrNight = current.getHours();
+let pastNoon;  
+let hours;
 
-
-
-
-const determineAmOrPm = function(){
-    if (current.getHours() > 12){
-        dayOrNight = (current.getHours() - 12);
-        pastNoon = "PM";
-    } else {
-        pastNoon = "AM";1
-    }
-};
-
-const determineMonth = function(){ 
+const determineMonth = function(monthNumber){ 
     switch (monthNumber){
     case 1: 
         monthName = "January";
@@ -34,7 +21,7 @@ const determineMonth = function(){
         monthName = "May";
         break;
     case 6: 
-         monthName = "June";
+        monthName = "June";
         break;      
     case 7: 
         monthName = "July";
@@ -61,28 +48,30 @@ const determineMonth = function(){
 
 
 
- determineMonth();
- determineAmOrPm();
-// let date = monthName + " " + current.getDate();
-// let time = dayOrNight + ":" + current.getMinutes() + ":" + current.getSeconds() + " " + pastNoon;
 
-
-console.log(time);
-console.log(date);
-
-// let today = document.getElementById("date");
-// today.textContent = date;
-
-// let clock = document.getElementById("time");
-// clock.textContent = time;
+const determineAmOrPm = function(hourNumber){
+    if (hourNumber > 12){
+        hours = hourNumber - 12;
+        pastNoon = "PM";
+    } else {
+        hours = hourNumber;
+        pastNoon = "AM";
+    }
+};
 
 setInterval(function(){
+    let current = new Date();
+    let dayOrNight = current.getHours();
+    let monthNumber = (current.getMonth()+1);
+    determineMonth(monthNumber);
+    determineAmOrPm(dayOrNight);
     let date = monthName + " " + current.getDate();
-    let time = dayOrNight + ":" + current.getMinutes() + ":" + current.getSeconds() + " " + pastNoon;
+    let time = hours + ":" + current.getMinutes() + ":" + current.getSeconds() + " " + pastNoon;
+    //need to get minutes and seconds to be two digits when < 10 - currently has one digit
     let today = document.getElementById("date");
     today.textContent = date;
 
     let clock = document.getElementById("time");
     clock.textContent = time;
-})
+}, 1000);
 
