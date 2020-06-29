@@ -63,18 +63,26 @@ const determineMonth = function(){
 
  determineMonth();
  determineAmOrPm();
-let date = monthName + " " + current.getDate();
-let time = dayOrNight + ":" + current.getMinutes() + ":" + current.getSeconds() + " " + pastNoon;
+// let date = monthName + " " + current.getDate();
+// let time = dayOrNight + ":" + current.getMinutes() + ":" + current.getSeconds() + " " + pastNoon;
 
 
 console.log(time);
 console.log(date);
 
-let today = document.getElementById("date");
-today.textContent = date;
+// let today = document.getElementById("date");
+// today.textContent = date;
 
-let clock = document.getElementById("time");
-clock.textContent = time;
+// let clock = document.getElementById("time");
+// clock.textContent = time;
 
+setInterval(function(){
+    let date = monthName + " " + current.getDate();
+    let time = dayOrNight + ":" + current.getMinutes() + ":" + current.getSeconds() + " " + pastNoon;
+    let today = document.getElementById("date");
+    today.textContent = date;
 
+    let clock = document.getElementById("time");
+    clock.textContent = time;
+})
 
