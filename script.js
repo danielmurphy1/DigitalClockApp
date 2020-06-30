@@ -1,7 +1,8 @@
-
+ 
 let monthName;
 let pastNoon;  
-let hours;
+// let hours; //get rid of this variable
+let isMilitaryTime = false;
 
 
 const determineMonth = function(monthNumber){ 
@@ -79,45 +80,62 @@ const determineDay = function(dayNumber) {
 
 const determineAmOrPm = function(hourNumber){
     if (hourNumber > 12){
-        hours = hourNumber - 12;
+        // hours = hourNumber - 12; //get rid
+        pastNoon = "PM";
+    } else if (hourNumber === 12){
+        // hours = hourNumber; //get rid
         pastNoon = "PM";
     } else {
-        hours = hourNumber;
+        // hours = hourNumber; //get rid
         pastNoon = "AM";
     }
 };
 
-const toggleHours = function(){
-    console.log("test");
-    if(pastNoon = "PM" && hours > 12){
-        hours = hours - 12;
+// const toggleHours = function(){ // probably wont need - replace with function that toggles "isMilitaryTime"
+//     console.log("test");
+//     if(pastNoon === "PM" && hours > 12){
+//         hours = hours - 12;
        
-    }else if (pastNoon = "PM" && hours <= 12){
-        hours = hours + 12;
+//     }else if (pastNoon === "PM" && hours < 12){
+//         hours = hours + 12;
         
+//     }
+//     //return hours;
+    
+//     return console.log(hours);
+// };
+
+const toggleMilitaryTime = function(){
+    console.log("test");
+    if(isMilitaryTime){
+        isMilitaryTime = false;
+    } else if (!isMilitaryTime){
+        isMilitaryTime = true;
     }
-    //return hours;
-    return console.log(hours);
+    return console.log(isMilitaryTime);
 };
 
-document.getElementById("btn").addEventListener("click", toggleHours);
+
+
+
+document.getElementById("btn").addEventListener("click", toggleMilitaryTime);
 
 setInterval(function(){
     let current = new Date();
-    let dayOrNight = current.getHours();
+    let hours = current.getHours(); //change var name to "hours"
     let monthNumber = (current.getMonth()+1);
     let dayNumber = current.getDay()+1;
     let seconds = (current.getSeconds() <10 ? "0" : "") + current.getSeconds();
     let minutes = (current.getMinutes() <10 ? "0" : "") + current.getMinutes();
     determineMonth(monthNumber);
-    determineAmOrPm(dayOrNight);
+    determineAmOrPm(hours); //pass in "hours"
     determineDay(dayNumber);
     let date = dayName + "," + " " + monthName + " " + current.getDate();
-    let time = hours + ":" + minutes + ":" + seconds + " " + pastNoon;
+    let time = (isMilitaryTime === false && pastNoon === "PM" ? hours -12 : hours) + ":" + minutes + ":" + seconds + " " + pastNoon; // hours var needs a conditional to check isMilitaryTime - if false hours-12 if true hours
     let today = document.getElementById("date");
     today.textContent = date;
 
     let clock = document.getElementById("time");
     clock.textContent = time;
-}, 5000);
+}, 1000);
 

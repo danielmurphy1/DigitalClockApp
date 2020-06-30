@@ -14,11 +14,11 @@ p{
 }
 
 
+
 div{
-   display: flex;
+  
     margin: auto; 
-    width: 50%;
-    border: 1px solid black;
+    width: 80%;
     text-align: center;
-    align-content: space-around;
+   
 }
