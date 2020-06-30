@@ -3,6 +3,7 @@ let monthName;
 let pastNoon;  
 let hours;
 
+
 const determineMonth = function(monthNumber){ 
     switch (monthNumber){
     case 1: 
@@ -46,6 +47,33 @@ const determineMonth = function(monthNumber){
     return monthName;
 };
 
+const determineDay = function(dayNumber) {
+    switch (dayNumber){
+        case 1: 
+            dayName = "Sunday";
+            break;
+        case 2: 
+            dayName = "Monday";
+            break;
+        case 3: 
+            dayName = "Tuesday";
+            break;
+        case 4: 
+            dayName = "Wednesday";
+            break;
+        case 5: 
+            dayName = "Thursday";
+            break;
+        case 6: 
+            dayName = "Friday";
+            break;      
+        case 7: 
+            dayName = "Saturday";
+            break;
+        default:     
+        } 
+        return dayName;
+    };      
 
 
 
@@ -59,19 +87,37 @@ const determineAmOrPm = function(hourNumber){
     }
 };
 
+const toggleHours = function(){
+    console.log("test");
+    if(pastNoon = "PM" && hours > 12){
+        hours = hours - 12;
+       
+    }else if (pastNoon = "PM" && hours <= 12){
+        hours = hours + 12;
+        
+    }
+    //return hours;
+    return console.log(hours);
+};
+
+document.getElementById("btn").addEventListener("click", toggleHours);
+
 setInterval(function(){
     let current = new Date();
     let dayOrNight = current.getHours();
     let monthNumber = (current.getMonth()+1);
+    let dayNumber = current.getDay()+1;
+    let seconds = (current.getSeconds() <10 ? "0" : "") + current.getSeconds();
+    let minutes = (current.getMinutes() <10 ? "0" : "") + current.getMinutes();
     determineMonth(monthNumber);
     determineAmOrPm(dayOrNight);
-    let date = monthName + " " + current.getDate();
-    let time = hours + ":" + current.getMinutes() + ":" + current.getSeconds() + " " + pastNoon;
-    //need to get minutes and seconds to be two digits when < 10 - currently has one digit
+    determineDay(dayNumber);
+    let date = dayName + "," + " " + monthName + " " + current.getDate();
+    let time = hours + ":" + minutes + ":" + seconds + " " + pastNoon;
     let today = document.getElementById("date");
     today.textContent = date;
 
     let clock = document.getElementById("time");
     clock.textContent = time;
-}, 1000);
+}, 5000);
 
