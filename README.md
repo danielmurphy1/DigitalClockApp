@@ -1,0 +1,1 @@
+![Clock App Screenshot](https://github.com/danielmurphy1/DigitalClockApp/blob/master/DigitalClockScreen.PNG)
