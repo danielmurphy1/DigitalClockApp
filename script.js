@@ -90,31 +90,37 @@ const determineAmOrPm = function(hourNumber){
 
 
 const toggleMilitaryTime = function(){
-    console.log("test");
-    if(isMilitaryTime){
-        isMilitaryTime = false;
-    } else if (!isMilitaryTime){
-        isMilitaryTime = true;
-    }
-    return console.log(isMilitaryTime);
+    isMilitaryTime = !isMilitaryTime;
 };
 
+function getCurrentSeconds(current){
+    return (current.getSeconds() <10 ? "0" : "") + current.getSeconds();
+}
 
-
+function getCurrentMinutes(current){
+    return (current.getMinutes() <10 ? "0" : "") + current.getMinutes();
+}
 document.getElementById("btn").addEventListener("click", toggleMilitaryTime);
 
 setInterval(function(){
     let current = new Date();
-    let hours = current.getHours(); 
+    let hours = current.getHours() +3; 
     let monthNumber = (current.getMonth()+1);
     let dayNumber = current.getDay()+1;
-    let seconds = (current.getSeconds() <10 ? "0" : "") + current.getSeconds();
-    let minutes = (current.getMinutes() <10 ? "0" : "") + current.getMinutes();
+    let seconds = getCurrentSeconds(current);
+    let minutes = getCurrentMinutes(current);
     determineMonth(monthNumber);
     determineAmOrPm(hours); 
     determineDay(dayNumber);
-    let date = dayName + "," + " " + monthName + " " + current.getDate();
-    let time = (isMilitaryTime === false && pastNoon === "PM" && hours > 12 ? hours -12 : hours) + ":" + minutes + ":" + seconds + " " + pastNoon; // hours var needs a conditional to check isMilitaryTime - if false hours-12 if true hours
+    let date = `${dayName}, ${monthName} ${current.getDate()}`;
+    let time = 
+        (isMilitaryTime === false && pastNoon === "PM" && hours > 12 
+            ? hours - 12 
+            : hours) + 
+        ":" + minutes + 
+        ":" + seconds + 
+        " " + 
+        (isMilitaryTime === false ? pastNoon : ""); //determines whether AM or PM is needed based on whether using 12 or 24 hour display
     let today = document.getElementById("date");
     today.textContent = date;
 

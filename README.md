@@ -20,6 +20,8 @@ ___
 
 Digital Clock App was created without using any libraries or frameworks.
 
+This is the first project/application that I have created without following along with a tutorial...the first application that is "all me". In creating this application, I learned how to use the setInterval function. Moreover, I learned the very basics of inserting elements into the DOM to display on the webapge as well as creating a functional element (the button), that will dynamically change the DOM with user input.  
+
 ### Author
 ___
-Dan Murphy 
+Dan Murphy, Software Developer
