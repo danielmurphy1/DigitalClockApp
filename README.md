@@ -8,6 +8,8 @@ The Digital Clock App displays the user's current day, month, date, and time. Th
 
 ![Clock App Screenshot](https://github.com/danielmurphy1/DigitalClockApp/blob/master/DigitalClockScreen.PNG)
 
+Access the app [here](https://github.com/danielmurphy1/DigitalClockApp)
+
 ### Instructions
 
 ---
